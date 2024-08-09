@@ -1,10 +1,16 @@
 // Create by `rafce` command
 import React from 'react';
+import { Route, Router, Routes } from 'react-router-dom';
+import Join from './components/Join';
+import Chat from './components/Chat';
 
-const App = () => {
+export default function App() {
   return (
-    <h1>Hello World</h1>
-  )
-};
-
-export default App;
+    <>
+      <Routes>
+        <Route path="/" Component={Join}/>
+        <Route path="/chat" Component={Chat}/>
+      </Routes>
+    </>
+  );
+}
