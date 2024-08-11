@@ -12,7 +12,7 @@ export default function TextContainer({ users }: TextContainerProps) {
     <Container className="text-white d-flex flex-column justify-content-between h-60 me-2">
       <div>
         <h4>Realtime Chat Application <span role="img" aria-label="emoji">💬</span></h4>
-        <h5>Created with React, Express, Node and Socket.IO <span role="img" aria-label="emoji">❤️</span></h5>
+        <h5>Created with MongoDB, React, Express, Node and Socket.IO <span role="img" aria-label="emoji">❤️</span></h5>
         <h5>Try it out right now! <span role="img" aria-label="emoji">⬅️</span></h5>
       </div>
       {users && (

@@ -140,6 +140,11 @@ io.on(SOCKET_EVENT.CONNECT, (socket: Socket) => {
         user: chatMessage.user,
         text: chatMessage.text,
       });
+
+      io.to(user.room).emit(SOCKET_EVENT.ROOM_DATA, {
+        room: user.room,
+        users: getUsersInRoom(user.room),
+      });
     }
   });
 });
