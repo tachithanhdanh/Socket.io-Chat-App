@@ -11,7 +11,7 @@ import { SOCKET_EVENT } from './constants';
 dotenv.config();
 
 // Import the 'dotenv' module
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5050;
 
 // Create an Express application
 const app = express();
@@ -35,9 +35,13 @@ app.use(router);
 console.log("Hello")
 
 io.on(SOCKET_EVENT.CONNECT, (socket : Socket) => {
-  console.log('We have a new connection!!!');
+  // console.log('We have a new connection!!!');
 
   socket.on(SOCKET_EVENT.JOIN, ({ name, room }, callback: Function) => {
+    if (name.trim().toLowerCase() === 'admin') {
+      return callback('Cannot use the name "admin"');
+    }
+
     const { error, user } = addUser({ id: socket.id, name, room }) as { error: string; user?: User };
     
     if (!user) return callback(error);
@@ -49,6 +53,10 @@ io.on(SOCKET_EVENT.CONNECT, (socket : Socket) => {
     socket.broadcast.to(user.room).emit(SOCKET_EVENT.SERVER_MESSAGE, { user : 'admin', text: `${user.name} has joined!` });
 
     socket.join(user.room);
+
+    // Emit a message to everyone in the room
+    // Purpose: To update the list of users in the room 
+    io.to(user.room).emit(SOCKET_EVENT.ROOM_DATA, { room: user.room, users: getUsersInRoom(user.room) });
 
     // This callback is called without any arguments if there is no error
     callback();
@@ -62,12 +70,17 @@ io.on(SOCKET_EVENT.CONNECT, (socket : Socket) => {
     }
 
     io.to(user.room).emit(SOCKET_EVENT.SERVER_MESSAGE, { user: user.name, text: message });
+    io.to(user.room).emit(SOCKET_EVENT.ROOM_DATA, { room: user.room, users: getUsersInRoom(user.room) });
 
     callback();
   });
 
   socket.on(SOCKET_EVENT.DISCONNECT, () => {
-    console.log('User had left!!!');
+    const user: User | undefined = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit(SOCKET_EVENT.SERVER_MESSAGE, { user: 'admin', text: `${user.name} has left.` });
+    }
   });
 });
 

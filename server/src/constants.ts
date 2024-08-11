@@ -4,6 +4,7 @@ const SOCKET_EVENT = {
   JOIN: 'join',
   DISCONNECT: 'disconnect',
   CONNECT: 'connection',
+  ROOM_DATA: 'roomData',
 }
 
 export { SOCKET_EVENT };
