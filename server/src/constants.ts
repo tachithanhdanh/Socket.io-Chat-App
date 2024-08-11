@@ -5,6 +5,7 @@ const SOCKET_EVENT = {
   DISCONNECT: 'disconnect',
   CONNECT: 'connection',
   ROOM_DATA: 'roomData',
+  CHAT_LOG: 'chatLog',
 }
 
 export { SOCKET_EVENT };

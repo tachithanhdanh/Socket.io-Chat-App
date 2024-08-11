@@ -8,7 +8,7 @@ interface InfoBarProps {
 
 export default function InfoBar({ room }: InfoBarProps) {
   return (
-    <div className="infoBar">
+    <div className="infoBar py-3">
       <div className="leftInnerContainer">
         <img className="onlineIcon" src={onlineIcon} alt="online icon" />
         <h4>{room}</h4>
