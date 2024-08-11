@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, Container, Form, Row, Stack } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css"; // Import bootstrap css
 import { Link } from "react-router-dom";
 
 /*

@@ -7,7 +7,7 @@ interface User {
 }
 
 // Add user to users array
-export function addUser({ id, name, room }: User) {
+function addUser({ id, name, room }: User): { error?: string; user?: User } {
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
 
@@ -22,11 +22,13 @@ export function addUser({ id, name, room }: User) {
   const user: User = { id, name, room };
 
   users.push(user);
+
+  return { user };
 }
 
 
 // Remove user from users array
-export function removeUser(id: string) {
+function removeUser(id: string) {
   const index = users.findIndex((user) => user.id === id);
 
   if (index !== -1) {
@@ -36,14 +38,16 @@ export function removeUser(id: string) {
 }
 
 // Get user from users array
-export function getUser(id: string) {
+function getUser(id: string) {
   // return the user with the id
   // if not found, return undefined
   return users.find((user) => user.id === id);
 }
 
 // get all users in a room
-export function getUsersInRoom(room: string) {
+function getUsersInRoom(room: string) {
   // return all users in the room
   return users.filter((user) => user.room === room);
 }
+
+export { addUser, removeUser, getUser, getUsersInRoom, User };

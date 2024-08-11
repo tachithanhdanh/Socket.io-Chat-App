@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { BrowserRouter } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css"; // Import bootstrap css
 
 // Render the app through add a root element to the DOM
 ReactDOM.createRoot(document.getElementById('root')!).render(
