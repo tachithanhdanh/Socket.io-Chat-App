@@ -9,7 +9,7 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" Component={Join}/>
-        <Route path="/chat" Component={Chat}/>
+        <Route path="/chat" element={<Chat location={window.location}/>}/>
       </Routes>
     </>
   );
